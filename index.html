@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Forensic Tool</title>
+    <style>
+        /* Reset some default browser styles */
+        body, h1, ul, li, form {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Set a background color for the body */
+        body {
+            background-color: #071e3d; /* Custom background color */
+            font-family: 'Courier New', monospace; /* Monospace font for the hacker look */
+            color: #00ff00; /* Green text */
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Full-screen height */
+        }
+
+        /* Center the container vertically and horizontally */
+        .container {
+            height: 500px; /* Increase the height to make the container taller */
+            width: 800px; /* Increase the width to make the container wider */
+            padding: 20px;
+            background-color: #0a3559; /* Custom background color for the container */
+            border: 1px solid #00ff00; /* Green border */
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #00ff00; /* Green header text */
+            font-size: 24px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="file"] {
+            margin: 0 auto;
+            display: block;
+            padding: 10px;
+            background-color: #0a3559; /* Custom background color for the input */
+            border: 1px solid #00ff00; /* Green border */
+            color: #00ff00;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        ul {
+            list-style: none;
+            color: #f00;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+        
+        #header {
+            color: #00ff00; /* Green text */
+            font-size: 36px; /* Larger font size */
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+        }
+        #up-btn{
+
+            margin: 20px;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1 id="header">Digital Forensic</h1>
+    <div class="container">
+        <h1>Image Forensic Tool</h1>
+        
+        <form method="POST" action="/" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" required>
+            <input id="up-btn"type="submit" value="Upload and Analyze">
+        </form>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>

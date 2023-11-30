@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Analysis Results</title>
+    <style>
+        /* Reset some default browser styles */
+        body, h1, table, tr, th, td {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Set a background color for the body */
+        body {
+            background-color: #071e3d; /* Custom background color */
+            font-family: 'Courier New', monospace; /* Monospace font for the hacker look */
+            color: #00ff00; /* Green text */
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Full-screen height */
+        }
+
+        /* Center the container vertically and horizontally */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #0a3559; /* Custom background color for the container */
+            border: 1px solid #00ff00; /* Green border */
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #00ff00; /* Green header text */
+            font-size: 24px; /* Increase font size */
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #0a3559; /* Custom background color for table headers */
+            color: #00ff00; /* Green text for table headers */
+        }
+
+        .image-cell {
+            display: flex;
+            justify-content: center; /* Horizontal centering */
+            align-items: center; /* Vertical centering */
+        }
+
+        .image-cell img {
+            max-width: 200px;
+            max-height: 200px;
+        }
+
+        td {
+            background-color: #0a3559; /* Custom background color for table cells */
+            color: #00ff00; /* Green text for table cells */
+        }
+        a{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Digital Image Forensic Analysis Results</h1>
+
+        <div class="image-cell">
+            <img src="{{ url_for('static', filename=filename) }}" alt="Uploaded Image">
+        </div>
+
+        <table>
+            <tr>
+                <th>Property</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Uploaded Image</td>
+                <td>{{ filename }}</td>
+            </tr>
+            {% if exif_data %}
+                <tr>
+                    <td>Image Dimensions</td>
+                    <td>{{ exif_data.ImageWidth }} x {{ exif_data.ImageLength }} pixels</td>
+                </tr>
+                <tr>
+                    <td>EXIF Data</td>
+                    <td>
+                        <ul>
+                            {% for tag, value in exif_data.items() %}
+                                <li>{{ tag }}: {{ value }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td>No EXIF data found in the image.</td>
+                    <td></td>
+                </tr>
+            {% endif %}
+        </table>
+        
+        <a href="/">Upload Another Image</a>
+    </div>
+</body>
+</html>
